@@ -1,0 +1,19 @@
+{
+  "name": "landing-page-project",
+  "version": "1.0.0",
+  "description": "Project from udacity course Javascript & the DOM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanbrunetto/cd1706-udaciracer-project-starter.git"
+  },
+  "author": "Ivan Brunetto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanbrunetto/cd1706-udaciracer-project-starter/issues"
+  },
+  "homepage": "https://github.com/ivanbrunetto/cd1706-udaciracer-project-starter#readme"
+}
