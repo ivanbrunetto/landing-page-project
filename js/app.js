@@ -31,7 +31,15 @@ console.log(sections);
  * Start Helper Functions
  * 
 */
-
+function buildNavLi(link, name) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + link;
+    a.className = 'menu__link';
+    a.innerText = name;
+    li.appendChild(a);
+    return li
+}
 
 
 /**
@@ -45,17 +53,10 @@ function buildNavigation() {
     const navbarList = document.getElementById('navbar__list');
     const fragment = document.createDocumentFragment();
     for (const section of sections) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#' + section.id;
-        a.className = 'menu__link';
-        a.innerText = section.dataset.nav;
-        li.appendChild(a);
+        const li = buildNavLi(section.id, section.dataset.nav);
         fragment.appendChild(li);
     }
     navbarList.appendChild(fragment);
-
-
 }
 
 // Add class 'active' to section when near top of viewport
