@@ -23,24 +23,74 @@
  * 
 */
 const sections = document.getElementsByTagName('section');
-console.log(sections);
-
+let activeSection = null;
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-function buildNavLi(link, name) {
+function buildNavLi(id, name) {
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = '#' + link;
-    a.className = 'menu__link';
+    a.href = '#' + id;
+    a.id = 'nav-' + id;
+    a.classList.add('menu__link');
+    //a.classList.add(id);
     a.innerText = name;
     li.appendChild(a);
     return li
 }
 
+function toggleActiveSection(active) {
+    for (const section of sections) {
+        if (section === active) {
+            section.classList.add('active');
+        } else {
+            section.classList.remove('active');
+        }
+    }
+}
+
+function toggleActiveNavLink(active) {
+    const menuItems = document.querySelectorAll('.menu__link');
+    for (const menuItem of menuItems) {
+        if (menuItem === active) {
+            menuItem.classList.add('active');
+        } else {
+            menuItem.classList.remove('active');
+        }
+    }
+}
+
+// Add class 'active' to section when it is near top of viewport
+function makeActive() {
+    for (const section of sections) {
+        const box = section.getBoundingClientRect();
+        if (box.top <= 150 && box.bottom >= 150) {
+            if (activeSection != section) {
+                toggleActiveSection(section);
+                toggleActiveNavLink(document.querySelector('#nav-' + section.id));
+
+            }
+            activeSection = section;
+        }
+    }
+    
+}
+
+function throttle (callbackFn, limit) {
+    let wait = false;                  
+    return function () {              
+        if (!wait) {                  
+            callbackFn.call();           
+            wait = true;               
+            setTimeout(function () {   
+                wait = false;          
+            }, limit);
+        }
+    }
+}  
 
 /**
  * End Helper Functions
@@ -81,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Scroll to section on link click
 
-// Set sections as active
 
+// Set sections as active
+document.addEventListener("scroll", throttle(makeActive, 100));
 
