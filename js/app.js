@@ -113,6 +113,12 @@ function buildNavigation() {
 
 
 // Scroll to anchor ID using scrollTO event
+function scrollToSmooth(anchor) {
+    const idIndex = anchor.href.search(/#/);
+    const id = anchor.href.substring(idIndex + 1);
+    const element = document.getElementById(id);
+    element.scrollIntoView({ behavior: 'smooth' });
+}
 
 
 /**
@@ -125,11 +131,18 @@ function buildNavigation() {
 document.addEventListener('DOMContentLoaded', function () {
     console.log('the DOM is ready to be interacted with!');
     buildNavigation();
-
+    
 });
 
 
 // Scroll to section on link click
+document.querySelector('.navbar__menu').addEventListener('click', event => {
+    const target = event.target;
+    if (target.nodeName === 'A') {
+        event.preventDefault();
+        scrollToSmooth(target);
+    }
+});
 
 
 // Set sections as active
