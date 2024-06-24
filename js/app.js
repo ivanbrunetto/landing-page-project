@@ -13,10 +13,6 @@
  * 
 */
 
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
 
 /**
  * Define Global Variables
@@ -33,15 +29,17 @@ let activeSection = null;
 function buildNavLi(id, name) {
     const li = document.createElement('li');
     const a = document.createElement('a');
+    
     a.href = '#' + id;
     a.id = 'nav-' + id;
     a.classList.add('menu__link');
-    //a.classList.add(id);
     a.innerText = name;
     li.appendChild(a);
+    
     return li
 }
 
+//toggle the class 'active' of all sections
 function toggleActiveSection(active) {
     for (const section of sections) {
         if (section === active) {
@@ -52,8 +50,10 @@ function toggleActiveSection(active) {
     }
 }
 
+//toggle the class 'active' of all menu links
 function toggleActiveNavLink(active) {
     const menuItems = document.querySelectorAll('.menu__link');
+    
     for (const menuItem of menuItems) {
         if (menuItem === active) {
             menuItem.classList.add('active');
@@ -63,24 +63,14 @@ function toggleActiveNavLink(active) {
     }
 }
 
-// Add class 'active' to section when it is near top of viewport
-function makeActive() {
-    for (const section of sections) {
-        const box = section.getBoundingClientRect();
-        if (box.top <= 150 && box.bottom >= 150) {
-            if (activeSection != section) {
-                toggleActiveSection(section);
-                toggleActiveNavLink(document.querySelector('#nav-' + section.id));
 
-            }
-            activeSection = section;
-        }
-    }
-    
-}
-
+/**
+ * return a fcuntion that will wait 'limit' milliseconds and then call the 
+ * 'callbackFn'
+ */
 function throttle (callbackFn, limit) {
     let wait = false;                  
+    
     return function () {              
         if (!wait) {                  
             callbackFn.call();           
@@ -102,14 +92,31 @@ function throttle (callbackFn, limit) {
 function buildNavigation() {
     const navbarList = document.getElementById('navbar__list');
     const fragment = document.createDocumentFragment();
+    
     for (const section of sections) {
         const li = buildNavLi(section.id, section.dataset.nav);
+        
         fragment.appendChild(li);
     }
     navbarList.appendChild(fragment);
 }
 
-// Add class 'active' to section when near top of viewport
+// Add class 'active' to section when it is near top of viewport
+function makeActive() {
+    for (const section of sections) {
+        const box = section.getBoundingClientRect();
+        
+        if (box.top <= 150 && box.bottom >= 150) {
+            if (activeSection != section) {
+                toggleActiveSection(section);
+                toggleActiveNavLink(document.querySelector('#nav-' + section.id));
+
+            }
+            activeSection = section;
+        }
+    }
+    
+}
 
 
 // Scroll to anchor ID using scrollTO event
@@ -117,6 +124,7 @@ function scrollToSmooth(anchor) {
     const idIndex = anchor.href.search(/#/);
     const id = anchor.href.substring(idIndex + 1);
     const element = document.getElementById(id);
+    
     element.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -128,16 +136,15 @@ function scrollToSmooth(anchor) {
 */
 
 // Build menu 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('the DOM is ready to be interacted with!');
+document.addEventListener('DOMContentLoaded', () => {
     buildNavigation();
-    
 });
 
 
 // Scroll to section on link click
 document.querySelector('.navbar__menu').addEventListener('click', event => {
     const target = event.target;
+    
     if (target.nodeName === 'A') {
         event.preventDefault();
         scrollToSmooth(target);
