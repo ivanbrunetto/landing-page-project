@@ -103,18 +103,28 @@ function buildNavigation() {
 
 // Add class 'active' to section when it is near top of viewport
 function makeActive() {
-    for (const section of sections) {
-        const box = section.getBoundingClientRect();
+    const headerBox = document.querySelector('.main-hero').getBoundingClientRect();
+    
+    if (headerBox.top <= 300 && headerBox.bottom >= 300) {
+        const section1 = document.querySelector('#section1');
         
-        if (box.top <= 150 && box.bottom >= 150) {
-            if (activeSection != section) {
-                toggleActiveSection(section);
-                toggleActiveNavLink(document.querySelector('#nav-' + section.id));
-
+        section1.classList.remove('active');
+        document.querySelector('#nav-' + section1.id).classList.remove('active');
+        activeSection = null;
+    } else {
+        for (const section of sections) {
+            const box = section.getBoundingClientRect();
+                
+            if (box.top <= 150 && box.bottom >= 150) {
+                if (activeSection != section) {
+                    toggleActiveSection(section);
+                    toggleActiveNavLink(document.querySelector('#nav-' + section.id));
+                    activeSection = section;
+                }
             }
-            activeSection = section;
         }
     }
+
     
 }
 
