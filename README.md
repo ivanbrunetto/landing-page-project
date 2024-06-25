@@ -1,9 +1,24 @@
 # Landing Page Project
 
-## Instructions
+## Description
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Project taken from Udacity **Java Script and the DOM** course for learning how to manipulate html document using DOM apis.
 
-To get started, open `js/app.js` and start building out the app's functionality
+It consists of a multi-section landing page that dynamically add a navigation menu to the page header. 
 
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+The landing page presents the first opportunity to fully combine skills in HTML, CSS, and JavaScript into a large project. 
+
+The starter project has some HTML and CSS styling to display a static version of the Landing Page project. 
+
+
+## Usage
+
+The sections are illustrated with deafult `lorem ipsum` text as placeholders. 
+
+Whenever each section is being viewed it is distinguished from the others with a background color change and animated circles at its top and bottom.
+
+When clicking an item from the navigation menu, the page smoothly scrolls to the appropriate section. 
+
+## Dependencies
+
+***None***
