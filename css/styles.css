@@ -221,3 +221,7 @@ section.active .landing__container::after {
 		           rotate(-360deg);
 	}
 }
+
+.navbar__menu .menu__link.active {
+    background: rgba(0, 0, 0, 0.291);
+}
